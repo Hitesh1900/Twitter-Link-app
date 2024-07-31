@@ -32,7 +32,7 @@ export class AuthService {
   async validateToken(token: string): Promise<boolean> {
     try {
       const decoded = this.jwtService.verify(token);
-      // You might want to perform additional checks or validations here
+
       return !!decoded;
     } catch (e) {
       return false;
@@ -47,9 +47,7 @@ export class AuthService {
   }
 
   async postTweet(tweetUrl: string, tweetContent: string, user: any): Promise<any> {
-    // Example logic to post a tweet
     try {
-      // You may need to prepare the payload or headers according to ClickToTweet API
       const response = await lastValueFrom(this.httpService.post(tweetUrl, {
         content: tweetContent,
         user: user,

@@ -1,4 +1,3 @@
-// src/app.module.ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
@@ -10,7 +9,7 @@ dotenv.config();
 console.log(process.env.JWT_SECRET);
 @Module({
   imports: [
-    ConfigModule.forRoot(), // Ensure ConfigModule is imported
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -19,7 +18,7 @@ console.log(process.env.JWT_SECRET);
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       autoLoadEntities: true,
-      synchronize: false, // Disable in production
+      synchronize: false,
     }),
     AuthModule,
     TweetModule,

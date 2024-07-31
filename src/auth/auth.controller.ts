@@ -8,13 +8,13 @@ export class AuthController {
 
   @Post('register')
   async register(@Body() body: { username: string; password: string }): Promise<any> {
-    // Register the user and get the token
+
     const token = await this.authService.register(body.username, body.password);
 
-    // Return the response with sensitive information (useful for debugging)
+
     return {
       username: body.username,
-      password: body.password,  // Be cautious about returning passwords
+      password: body.password, 
     };
   }
   @Post('login')

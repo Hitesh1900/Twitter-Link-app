@@ -1,4 +1,3 @@
-// src/user/user.service.ts
 import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -19,7 +18,7 @@ export class UserService {
     try {
       return await this.userRepository.save(user);
     } catch (error) {
-      if (error.code === '23505') { // Unique violation error code for PostgreSQL
+      if (error.code === '23505') { 
         throw new ConflictException('Username already exists');
       }
       throw error;

@@ -9,12 +9,10 @@ export class TweetController {
   @Post('tweet')
   @UseGuards(JwtAuthGuard)
   async tweet(@Req() request: any, @Body() body: { tweetContent: string }) {
-    const user = request.user; // Access user data from token
+    const user = request.user; 
 
-    // Your logic to post a tweet using the ClickToTweet service
     const tweetUrl = 'https://clicktotweet.com/54Qdy';
 
-    // Perform the tweet action
     const result = await this.authService.postTweet(tweetUrl, body.tweetContent, user);
 
     return {
