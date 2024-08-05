@@ -1,22 +1,23 @@
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '../jwt-auth/jwt-auth.guard';
+import { Controller, Post, Req, UseGuards, Body } from '@nestjs/common';
 import { AuthService } from '../auth/auth.service';
+import { JwtAuthGuard } from '../jwt-auth/jwt-auth.guard';
+import { TweetDto } from './tweet.dto';
 
-@Controller('tweets')
+@Controller('tweet')
 export class TweetController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('tweet')
+  @Post()
   @UseGuards(JwtAuthGuard)
-  async tweet(@Req() request: any, @Body() body: { tweetContent: string }) {
+  async tweet(@Req() request: any, @Body() tweetDto: TweetDto) {
     const user = request.user; 
+    const { text, mediaUrl } = tweetDto;
 
-    const tweetUrl = 'https://clicktotweet.com/54Qdy';
-
-    const result = await this.authService.postTweet(tweetUrl, body.tweetContent, user);
+  
+    const result = await this.authService.postTweet(text, mediaUrl);
 
     return {
-      message: 'Tweet posted successfully',
+      message: 'Tweet URL generated successfully',
       result,
     };
   }

@@ -46,17 +46,14 @@ export class AuthService {
     };
   }
 
-  async postTweet(tweetUrl: string, tweetContent: string, user: any): Promise<any> {
-    try {
-      const response = await lastValueFrom(this.httpService.post(tweetUrl, {
-        content: tweetContent,
-        user: user,
-      }));
-      
-      return response.data;
-    } catch (error) {
-      throw new Error('Failed to post tweet');
+    async postTweet(text: string, mediaUrl?: string): Promise<any> {
+    let tweetText = encodeURIComponent(text);
+    if (mediaUrl) {
+      tweetText += `&media=${encodeURIComponent(mediaUrl)}`;
     }
+    const tweetUrl = `https://x.com/intent/post?text=${tweetText}&original_referer=https%3A%2F%2Fclicktotweet.com&related=clicktotweet`;
+    return { tweetUrl };
   }
-  
 }
+  
+
