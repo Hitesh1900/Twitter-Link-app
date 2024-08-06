@@ -7,6 +7,8 @@ import { JwtStrategy } from './jwt.strategy';
 import * as dotenv from 'dotenv';
 dotenv.config();
 import { AuthController } from './auth.controller'; 
+import { TweetModule } from 'src/tweet/tweet.module';
+import { TweetService } from 'src/tweet/tweet.service';
 
 @Module({
   imports: [HttpModule,
@@ -14,9 +16,10 @@ import { AuthController } from './auth.controller';
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '60m' },
     }),
-    UserModule, 
+    UserModule,
+    TweetModule,
   ],
-  providers: [AuthService,JwtStrategy],
+  providers: [AuthService,JwtStrategy,TweetService],
   controllers: [AuthController], 
   exports: [AuthService],
 })

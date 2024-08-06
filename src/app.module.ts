@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { TweetModule } from './tweet/tweet.module';
 import * as dotenv from 'dotenv';
+import { Tweet } from './tweet/tweet.entity';
 dotenv.config();
 console.log(process.env.JWT_SECRET);
 @Module({
@@ -18,6 +19,7 @@ console.log(process.env.JWT_SECRET);
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       autoLoadEntities: true,
+      entities: [Tweet],
       synchronize: false,
     }),
     AuthModule,

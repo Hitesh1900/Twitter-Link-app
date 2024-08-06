@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 export class Tweet {
@@ -6,11 +6,11 @@ export class Tweet {
   id: number;
 
   @Column()
-  content: string;
-
-  @Column()
-  twitterLink: string;
+  text: string;
 
   @Column({ nullable: true })
-  mediaUrl: string;
+  mediaUrl?: string;
+
+  @Column()
+  userId: number;
 }
