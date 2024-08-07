@@ -14,7 +14,7 @@ import { TweetService } from 'src/tweet/tweet.service';
   imports: [HttpModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '60m' },
+      signOptions: { expiresIn: '365d' },
     }),
     UserModule,
     TweetModule,

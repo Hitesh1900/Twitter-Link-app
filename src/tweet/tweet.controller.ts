@@ -13,15 +13,14 @@ export class TweetController {
     const user = request.user; 
     const { text, mediaUrl } = tweetDto;
 
-    // Save the tweet and generate a URL
     await this.authService.saveTweet(text, mediaUrl, user.id);
-
-    // Generate the tweet URL
+    const id=user.id;
     const result = await this.authService.postTweet(text, mediaUrl);
 
     return {
       message: 'Tweet saved and URL generated successfully',
       result,
+      id
     };
   }
 }

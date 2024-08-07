@@ -11,6 +11,8 @@ export class Tweet {
   @Column({ nullable: true })
   mediaUrl?: string;
 
-  @Column()
-  userId: number;
+  @Column({ default: 0 })
+  count: number;
+
+  
 }
