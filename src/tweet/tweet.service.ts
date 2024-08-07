@@ -20,9 +20,11 @@ export class TweetService {
     return await this.entityManager.save(tweet);
   }
 
-  async countAndStoreTweets(): Promise<void> {
-    const result = await this.entityManager.query('SELECT COUNT(*) FROM tweet');
-    const count = Number(result[0].count);
-    await this.entityManager.save(count);
+  async countUserTweets(userId: number): Promise<number> {
+    const result = await this.entityManager.createQueryBuilder(Tweet, 'tweet')
+      .where('tweet.userId = :userId', { userId })
+      .getCount();
+      
+    return result;
   }
 }
